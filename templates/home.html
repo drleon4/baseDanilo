@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>PracticaDB</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="page-header bg-dark navbar-dark text-info">
+      <h1 class="text-center ">UNIVERSIDAD TECNICA PARTICULAR DE LOJA</h1>
+      <h3 class="text-center">Danilo Romario Leon</h1>
+      <h5 class="text-center">CRUD Estudiante</h1>
+    </header>
+    <h3 class="navbar">Registrar Estudiante: </h3>
+    <main class="navbar">
+      <form method="POST" action="/" class="text-center form-control">
+        <h4>Cedula:</h4>
+        <input type="text" name="newced" placeholder="Escribir Cedula..." class="btn border-info" required>
+        <br>
+        <br>
+        <h4>Nombre:</h4> 
+        <input type="text" name="newname" placeholder="Escribir Nombre..." class="btn border-info" required>
+        <br>
+        <br>
+        <h4>Apellido:</h4> 
+        <input type="text" name="newlast" placeholder="Escribir Apellido..." class="btn border-info" required>
+        <br>
+        <br>
+        <input type="submit" value="Registrar" class="btn btn-success active ">
+      </form>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">LISTADO DEESTUDIANTES</th>
+          </tr>
+        </thead>
+        <thead class="thead-dark">
+          <tr>
+            <th>Cedula:</th>
+            <th>Nombre:</th>
+            <th>Apellido:</th>
+            <th class="text-center">DATOS:</th>
+          </tr>
+        </thead>
+
+        {% for est in stu %}
+        <tr>
+          <td>
+            <p>{{est.ced}}</p>
+          </td>
+
+          <td>
+            <p>{{est.name}}</p>
+          </td>
+
+          <td>
+            <p>{{est.last}}</p>
+          </td>
+
+          <td>
+            <form method="POST" action="./update">
+              <input type="hidden" value="{{est.ced}}" name="newced" required>
+              <input type="text" class="btn border-success mx-auto" value="{{est.name}}" name="newname" required>
+              <input type="text" class="btn border-success mx-sm-3"  value="{{est.last}}" name="newlast" required>
+              <input type="submit" value="Update" class="btn">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete">
+              <input type="hidden" value="{{est.ced}}" name="newced">
+              <input type="submit" value="Delete" class="btn text-warning btn-danger border-warning">
+            </form>
+          </td>
+         </tr>
+        {% endfor %}
+
+      </table>
+    </main>
+  </body>
+</html>
